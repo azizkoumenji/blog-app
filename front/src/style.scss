@@ -5,8 +5,9 @@ $light-green: #b9e7e7;
   font-family: Inter, sans-serif;
   display: flex;
   justify-content: center;
+
   .container {
-    width: 1024px;
+    width: 100%;
 
     .link {
       text-decoration: none;
@@ -118,6 +119,7 @@ $light-green: #b9e7e7;
       align-items: center;
       justify-content: space-between;
       font-size: 12px;
+
       img {
         height: 50px;
       }
@@ -215,6 +217,7 @@ $light-green: #b9e7e7;
           align-items: center;
           gap: 10px;
           font-size: 14px;
+
           img {
             height: 50px;
             width: 50px;

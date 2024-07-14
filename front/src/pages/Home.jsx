@@ -1,14 +1,28 @@
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Home() {
-  const posts = [
-    {
-      id: 1,
-      title: "Jxlcd Kds",
-      desc: "Ksjdsfdskhfsjkdhfsjkdfhskdfhjdsfgdsjf.",
-      img: "https://google.com",
-    },
-  ];
+  const [posts, setPosts] = useState([]);
+  const category = useLocation().search; // Lets us pick to category query from the link.
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await axios.get(`/api/posts/${category}`);
+        setPosts(result.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchData();
+  }, [category]);
+
+  const parseText = (html) => {
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    return doc.body.textContent;
+  };
 
   return (
     <div className="home">
@@ -23,8 +37,10 @@ export default function Home() {
                 <Link className="link" to={`/post/${post.id}`}>
                   <h1>{post.title}</h1>
                 </Link>
-                <p>{post.desc}</p>
-                <button>Read More</button>
+                <p>{parseText(post.description)}</p>
+                <Link to={`/post/${post.id}`}>
+                  <button>Read More</button>
+                </Link>
               </div>
             </div>
           );
