@@ -10,6 +10,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 
+app.use(express.static("dist"));
 app.use(express.json());
 app.use(cookieParser());
 
